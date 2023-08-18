@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import Task from "./components/Task";
+import Tasks from "./components/Tasks";
 import { useState } from 'react'
 
 function App() {
@@ -23,11 +23,22 @@ function App() {
         reminder: false,
     }
 ])
-  const name = 'Brain'
+ 
+// Delete task
+
+const deleteTask = (id) => {
+  setTask(tasks.filter((task)=> task.id !== id))
+}
   return (
     <div className="container">
       <Header />
-      <Task tasks={tasks}/>
+      {tasks.length > 0 ?(
+        <Tasks tasks={tasks} onDelete=
+        {deleteTask}/>
+      ): (
+        'No Active Task'
+      )}
+      
     </div>
   );
 }
