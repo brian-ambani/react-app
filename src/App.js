@@ -3,7 +3,7 @@ import Tasks from "./components/Tasks";
 import { useState } from 'react'
 
 function App() {
-  const [tasks, setTask] = useState([
+  const [tasks, setTasks] = useState([
     {
         id: 1,
         text: 'Doctors Appointment',
@@ -25,16 +25,25 @@ function App() {
 ])
  
 // Delete task
-
 const deleteTask = (id) => {
-  setTask(tasks.filter((task)=> task.id !== id))
+  setTasks(tasks.filter((task)=> task.id !== id))
+}
+
+// Toggle Reminder
+const toggleReminder = (id) => {
+  setTasks(
+    tasks.map((task) => 
+    task.id === id ? { ...task, reminder:
+      !task.reminder }: task
+    )
+  )
 }
   return (
     <div className="container">
       <Header />
       {tasks.length > 0 ?(
         <Tasks tasks={tasks} onDelete=
-        {deleteTask}/>
+        {deleteTask} onToggle={toggleReminder}/>
       ): (
         'No Active Task'
       )}
